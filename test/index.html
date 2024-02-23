@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app">
+        {{ message }}
+        <input type="text" v-focus>
+    </div>
+</body>
+<script type="module">
+    import vue3EasyDirectives from '../dist/vue3-easy-directives.mjs'
+    const { createApp, ref } = Vue
+    const app = createApp({
+        setup() {
+            const message = ref('Hello vue!')
+            return {
+                message
+            }
+        },
+    })
+    app.use(vue3EasyDirectives)
+    app.mount('#app')
+</script>
+</html>

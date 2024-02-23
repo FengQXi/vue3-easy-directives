@@ -1,14 +1,19 @@
 {
   "name": "vue3-easy-directives",
   "version": "1.0.0",
+  "author": "FengQX",
   "description": "",
-  "main": "index.js",
+  "main": "dist/vue3-easy-directives.umd.js",
+  "module": "dist/vue3-easy-directives.mjs",
+  "files": [
+    "dist",
+    "index.d.ts"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "vite build"
   },
   "keywords": [],
-  "author": "FengQX",
   "license": "ISC",
   "devDependencies": {
     "vite": "^5.1.4",
