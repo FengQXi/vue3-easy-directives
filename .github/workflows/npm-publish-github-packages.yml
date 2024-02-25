@@ -5,7 +5,7 @@ on:
     branches: [ main ]
     
 jobs:
-  build:
+  install_ved:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -16,9 +16,15 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
       - name: Install dependencies 📦️
       - run: npm install
-      - name: Build project 🚀
+  build_ved:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build project 🔧
         run: |
           npm run build
+  pubish_ved:
+    runs-on: ubuntu-latest
+    steps:
       -name: Publish to npmjs 🚀
       - run: npm publish
         env:
