@@ -36,9 +36,9 @@ jobs:
         # 这个 action 会根据配置自动推送代码到指定分支
         # uses: JamesIves/github-pages-deploy-action@releases/v3
       # 拉取 github 仓库代码
-      - uses: actions/checkout@v3
+        uses: actions/checkout@v3
       # 设定 node 环境
-      - uses: actions/setup-node@v3
+        uses: actions/setup-node@v3
         with:
           # 指定密钥，即在第一步中设置的
           ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
