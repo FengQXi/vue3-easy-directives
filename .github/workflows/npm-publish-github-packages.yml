@@ -16,11 +16,7 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
       - name: Install dependencies 📦️
       - run: npm install
-      - name: Build project 🔧
-      - run: |
-          npm run build
-      - name: Publish to npmjs 🚀
-      - run: |
-          npm publish
+      - run: npm run build
+      - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
