@@ -1,7 +1,9 @@
 import focus from './directives/focus.js'
+import trim from './directives/trim.js'
 
 const directives: Record<string, any> = {
-    focus: focus
+    focus,
+    trim
 }
 
 export default {
@@ -13,5 +15,6 @@ export default {
 }
 
 export {
-    focus
+    focus,
+    trim
 }

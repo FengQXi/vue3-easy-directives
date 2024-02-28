@@ -9,11 +9,11 @@
 <body>
     <div id="app">
         {{ message }}
-        <input type="text" v-focus>
+        <input type="text" v-model="message" v-trim>
     </div>
 </body>
 <script type="module">
-    import vue3EasyDirectives from '../dist/vue3-easy-directives.mjs'
+    import { trim } from '../dist/vue3-easy-directives.mjs'
     const { createApp, ref } = Vue
     const app = createApp({
         setup() {
@@ -22,8 +22,11 @@
                 message
             }
         },
+        directives: {
+            trim
+        }
     })
-    app.use(vue3EasyDirectives)
+    // app.use(vue3EasyDirectives)
     app.mount('#app')
 </script>
 </html>
