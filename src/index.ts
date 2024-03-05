@@ -1,5 +1,6 @@
 import focus from './directives/focus.js'
 import trim from './directives/trim.js'
+import lazyLoad from './plugins/lazyLoad.js'
 
 const directives: Record<string, any> = {
     focus,
@@ -16,5 +17,6 @@ export default {
 
 export {
     focus,
-    trim
+    trim,
+    lazyLoad,
 }
