@@ -1,6 +1,6 @@
 {
   "name": "vue3-easy-directives",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "author": "FengQX",
   "description": "",
   "main": "dist/vue3-easy-directives.umd.js",
