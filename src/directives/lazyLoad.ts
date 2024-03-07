@@ -1,9 +1,11 @@
-type OptionsType = {
+import { DirectiveBinding } from "vue"
+
+interface OptionsType {
     loading: string,
     error: string
 }
 
-let imageAsync = (url: string) => {
+const imageAsync = (url: string) => {
     return new Promise((resolve: Function, reject: Function) => {
         let img = new Image()
         img.src = url
@@ -18,7 +20,7 @@ let imageAsync = (url: string) => {
 
 const lazyLoad = function(options: OptionsType) {
     return {
-        mounted(el: any, binding: any) {
+        mounted(el: any, binding: DirectiveBinding) {
             el.src = options.loading;
             // https://developer.mozilla.org/zh-CN/docs/Web/API/IntersectionObserver
             const io = new IntersectionObserver((entries) => {

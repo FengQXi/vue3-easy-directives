@@ -1,8 +1,8 @@
 import { dispatchEvent, getElement } from '../utils'
 
 type ExpandHTMLElenment = HTMLElement & {
-    _inputEle: HTMLElement,
-    _blurHandler: Function
+    _vTrim_inputEle: HTMLElement,
+    _vTrim_handler: Function
 }
 
 const trim = {
@@ -15,13 +15,13 @@ const trim = {
                 dispatchEvent(inputEle, 'input')
             }
         }
-        el._inputEle = inputEle
-        el._blurHandler = handler
+        el._vTrim_inputEle = inputEle
+        el._vTrim_handler = handler
         inputEle.addEventListener('blur', handler)
     },
     unmounted(el: ExpandHTMLElenment) {
-        const { _inputEle } = el
-        _inputEle.removeEventListener('blur', el._blurHandler as any)
+        const { _vTrim_inputEle } = el
+        _vTrim_inputEle.removeEventListener('blur', el._vTrim_handler as any)
     }
 }
 
