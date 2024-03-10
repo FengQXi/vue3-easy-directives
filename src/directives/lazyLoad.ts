@@ -1,9 +1,16 @@
-type OptionsType = {
+import { DirectiveBinding } from "vue"
+
+interface OptionsType {
     loading: string,
     error: string
 }
 
-let imageAsync = (url: string) => {
+type ExpandHTMLImgElenment = HTMLImageElement & {
+    _vLazy_value: string,
+    _vLazy_error: Function
+}
+
+const imageAsync = (url: string) => {
     return new Promise((resolve: Function, reject: Function) => {
         let img = new Image()
         img.src = url
@@ -16,25 +23,35 @@ let imageAsync = (url: string) => {
     })
 }
 
+// https://developer.mozilla.org/zh-CN/docs/Web/API/Document/execCommand
+// https://developer.mozilla.org/zh-CN/docs/Web/API/IntersectionObserver
+const io = new IntersectionObserver((entries: IntersectionObserverEntry[]) => {
+    entries.forEach((entry: IntersectionObserverEntry) => {
+        if (entry.isIntersecting) {
+            const target = entry.target as ExpandHTMLImgElenment
+            imageAsync(target._vLazy_value).then(() => {
+                target.src = target._vLazy_value
+            }).catch((error) => {
+                target._vLazy_error()
+            })
+            io.unobserve(target)
+        }
+    })
+}, { threshold: 0.0 })
+
 const lazyLoad = function(options: OptionsType) {
     return {
-        mounted(el: any, binding: any) {
-            el.src = options.loading;
-            // https://developer.mozilla.org/zh-CN/docs/Web/API/IntersectionObserver
-            const io = new IntersectionObserver((entries) => {
-                entries.forEach((item) => {
-                    if (item.isIntersecting) {
-                        imageAsync(binding.value).then(() => {
-                            el.src = binding.value
-                        }).catch((error) => {
-                            el.src = options.error
-                        })
-                        io.unobserve(item.target)
-                    }
-                });
-            }, { threshold: 0.0 });
-            io.observe(el);
-        }
+        mounted(el: ExpandHTMLImgElenment, binding: DirectiveBinding) {
+            el.src = options.loading
+            el._vLazy_value = binding.value
+            el._vLazy_error = () => {
+                el.src = options.error
+            }
+            io.observe(el)
+        },
+        unmounted(el: ExpandHTMLImgElenment) {
+            io.unobserve(el)
+        },
     }
 }
 
