@@ -36,19 +36,22 @@ const io = new IntersectionObserver((entries: IntersectionObserverEntry[]) => {
             })
             io.unobserve(target)
         }
-    });
-}, { threshold: 0.0 });
+    })
+}, { threshold: 0.0 })
 
 const lazyLoad = function(options: OptionsType) {
     return {
         mounted(el: ExpandHTMLImgElenment, binding: DirectiveBinding) {
-            el.src = options.loading;
+            el.src = options.loading
             el._vLazy_value = binding.value
             el._vLazy_error = () => {
                 el.src = options.error
             }
-            io.observe(el);
-        }
+            io.observe(el)
+        },
+        unmounted(el: ExpandHTMLImgElenment) {
+            io.unobserve(el)
+        },
     }
 }
 
