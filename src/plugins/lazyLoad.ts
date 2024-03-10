@@ -1,12 +1,8 @@
 import lazyLoad from '../directives/lazyLoad.js'
-
-type OptionsType = {
-    loading: string,
-    error: string
-}
+import { LazyLoadOptions } from '../utils/type.js'
 
 export default {
-    install: (app: any, options: OptionsType) => {
+    install: (app: any, options: LazyLoadOptions) => {
         app.directive('lazyLoad', lazyLoad(options))
     }
-  }
+}

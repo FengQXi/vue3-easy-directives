@@ -20,7 +20,7 @@ const io = new IntersectionObserver((entries: IntersectionObserverEntry[]) => {
 function isBellowViewport(el: HTMLElement) {
     // https://developer.mozilla.org/zh-CN/docs/Web/API/Element/getBoundingClientRect
     const rect = el.getBoundingClientRect()
-    return rect.top < window.innerHeight && rect.bottom > 0
+    return rect.top > window.innerHeight && rect.bottom > 0
 }
 
 const slideIn = {
@@ -30,7 +30,7 @@ const slideIn = {
         }
         const animation = el.animate([
             {
-                transform: `translateY(${DISTANCE})`,
+                transform: `translateY(${DISTANCE}px)`,
                 opacity: 0.5
             },
             {
@@ -49,3 +49,5 @@ const slideIn = {
         io.unobserve(el)
     }
 }
+
+export default slideIn

@@ -17,7 +17,7 @@ const copy = {
             el._vCopy_value = binding.value
             const handler = async function() {
                 // https://developer.mozilla.org/zh-CN/docs/Web/API/Navigator/clipboard
-                navigator.clipboard.writeText(binding.value).then(() => {
+                navigator.clipboard.writeText(el._vCopy_value).then(() => {
                     if (!!el._vCopy_success || typeof el._vCopy_success === 'function') {
                         el._vCopy_success();
                     }
