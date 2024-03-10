@@ -5,6 +5,11 @@ interface OptionsType {
     error: string
 }
 
+type ExpandHTMLImgElenment = HTMLImageElement & {
+    _vLazy_value: string,
+    _vLazy_error: Function
+}
+
 const imageAsync = (url: string) => {
     return new Promise((resolve: Function, reject: Function) => {
         let img = new Image()
@@ -18,23 +23,30 @@ const imageAsync = (url: string) => {
     })
 }
 
+// https://developer.mozilla.org/zh-CN/docs/Web/API/Document/execCommand
+// https://developer.mozilla.org/zh-CN/docs/Web/API/IntersectionObserver
+const io = new IntersectionObserver((entries: IntersectionObserverEntry[]) => {
+    entries.forEach((entry: IntersectionObserverEntry) => {
+        if (entry.isIntersecting) {
+            const target = entry.target as ExpandHTMLImgElenment
+            imageAsync(target._vLazy_value).then(() => {
+                target.src = target._vLazy_value
+            }).catch((error) => {
+                target._vLazy_error()
+            })
+            io.unobserve(target)
+        }
+    });
+}, { threshold: 0.0 });
+
 const lazyLoad = function(options: OptionsType) {
     return {
-        mounted(el: any, binding: DirectiveBinding) {
+        mounted(el: ExpandHTMLImgElenment, binding: DirectiveBinding) {
             el.src = options.loading;
-            // https://developer.mozilla.org/zh-CN/docs/Web/API/IntersectionObserver
-            const io = new IntersectionObserver((entries) => {
-                entries.forEach((item) => {
-                    if (item.isIntersecting) {
-                        imageAsync(binding.value).then(() => {
-                            el.src = binding.value
-                        }).catch((error) => {
-                            el.src = options.error
-                        })
-                        io.unobserve(item.target)
-                    }
-                });
-            }, { threshold: 0.0 });
+            el._vLazy_value = binding.value
+            el._vLazy_error = () => {
+                el.src = options.error
+            }
             io.observe(el);
         }
     }
