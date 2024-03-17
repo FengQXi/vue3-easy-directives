@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite';
+import path from 'path';
 
 export default defineConfig({
     // 开发vue3库模式文档 https://cn.vitejs.dev/guide/build.html#library-mode
@@ -18,5 +19,10 @@ export default defineConfig({
                 }
             }
         }
+    },
+    resolve: {
+        alias: {
+          '@': path.resolve(__dirname, './src'),
+        },
     }
 })

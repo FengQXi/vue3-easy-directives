@@ -1,5 +1,5 @@
 import { DirectiveBinding } from 'vue'
-import { dispatchEvent, getElement } from '../utils'
+import { dispatchEvent, getElement } from '@/utils'
 
 type ExpandHTMLElenment = HTMLElement & {
     _vTrim_inputEle: HTMLElement,

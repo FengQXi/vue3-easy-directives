@@ -1,5 +1,5 @@
-import lazyLoad from '../directives/lazyLoad.js'
-import { LazyLoadOptions } from '../utils/type.js'
+import lazyLoad from '@/directives/lazyLoad.js'
+import { LazyLoadOptions } from '@/utils/type.js'
 
 export default {
     install: (app: any, options: LazyLoadOptions) => {

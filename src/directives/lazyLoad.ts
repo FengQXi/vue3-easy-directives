@@ -1,5 +1,5 @@
 import { DirectiveBinding } from "vue"
-import { LazyLoadOptions } from "../utils/type"
+import { LazyLoadOptions } from "@/utils/type"
 
 type ExpandHTMLImgElenment = HTMLImageElement & {
     _vLazy_value: string,
