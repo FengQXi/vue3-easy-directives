@@ -1,6 +1,6 @@
 {
   "name": "vue3-easy-directives",
-  "version": "1.0.5",
+  "version": "1.1.4",
   "author": "FengQX",
   "description": "",
   "main": "dist/vue3-easy-directives.umd.js",
@@ -16,6 +16,7 @@
   "keywords": [],
   "license": "ISC",
   "devDependencies": {
+    "@types/node": "^20.11.28",
     "vite": "^5.1.4",
     "vue": "^3.4.19"
   }

@@ -1,9 +1,5 @@
 import { DirectiveBinding } from "vue"
-
-interface OptionsType {
-    loading: string,
-    error: string
-}
+import { LazyLoadOptions } from "@/utils/type"
 
 type ExpandHTMLImgElenment = HTMLImageElement & {
     _vLazy_value: string,
@@ -39,7 +35,7 @@ const io = new IntersectionObserver((entries: IntersectionObserverEntry[]) => {
     })
 }, { threshold: 0.0 })
 
-const lazyLoad = function(options: OptionsType) {
+const lazyLoad = function(options: LazyLoadOptions) {
     return {
         mounted(el: ExpandHTMLImgElenment, binding: DirectiveBinding) {
             el.src = options.loading

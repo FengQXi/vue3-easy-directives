@@ -1,10 +1,14 @@
-import focus from './directives/focus.js'
-import trim from './directives/trim.js'
-import lazyLoad from './plugins/lazyLoad.js'
+import focus from '@/directives/focus.js'
+import trim from '@/directives/trim.js'
+import lazyLoad from '@/plugins/lazyLoad.js'
+import copy from '@/directives/copy.js'
+import slideIn from '@/directives/slideIn.js'
 
 const directives: Record<string, any> = {
     focus,
-    trim
+    trim,
+    copy,
+    slideIn
 }
 
 export default {
@@ -19,4 +23,6 @@ export {
     focus,
     trim,
     lazyLoad,
+    copy,
+    slideIn,
 }

@@ -1,4 +1,5 @@
-import { dispatchEvent, getElement } from '../utils'
+import { DirectiveBinding } from 'vue'
+import { dispatchEvent, getElement } from '@/utils'
 
 type ExpandHTMLElenment = HTMLElement & {
     _vTrim_inputEle: HTMLElement,
@@ -6,7 +7,11 @@ type ExpandHTMLElenment = HTMLElement & {
 }
 
 const trim = {
-    mounted(el: ExpandHTMLElenment) {
+    mounted(el: ExpandHTMLElenment, binding: DirectiveBinding) {
+        let { arg = 'blur' } = binding
+        if(arg !== 'input' && arg !== 'blur') {
+            arg = 'blur'
+        }
         let inputEle = getElement(el, 'input')
         const handler = function(event: any) {
             const newVal = event.target.value.trim()
@@ -17,7 +22,7 @@ const trim = {
         }
         el._vTrim_inputEle = inputEle
         el._vTrim_handler = handler
-        inputEle.addEventListener('blur', handler)
+        inputEle.addEventListener(arg, handler)
     },
     unmounted(el: ExpandHTMLElenment) {
         const { _vTrim_inputEle } = el

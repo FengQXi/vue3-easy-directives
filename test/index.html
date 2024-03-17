@@ -8,12 +8,15 @@
 </head>
 <body>
     <div id="app">
-        {{ message }}
+        <!-- <img v-lazyLoad="" alt=""> -->
+        <span>{{ message }}</span>
         <input type="text" v-model="message" v-trim>
+        <input type="button" v-copy="message" v-copy:success="() => { console.log('success') }">
+        <div class="children" v-for="i in 10" :key="i" v-slide-in></div>
     </div>
 </body>
 <script type="module">
-    import { trim } from '../dist/vue3-easy-directives.mjs'
+    import { trim, copy, slideIn } from '../dist/vue3-easy-directives.mjs'
     const { createApp, ref } = Vue
     const app = createApp({
         setup() {
@@ -23,10 +26,26 @@
             }
         },
         directives: {
-            trim
+            trim,
+            copy,
+            slideIn
         }
     })
     // app.use(vue3EasyDirectives)
     app.mount('#app')
 </script>
+
+<style>
+    .children {
+        width: 200px;
+        height: 200px;
+        margin: 30px;
+    }
+    .children:nth-child(odd) {
+        background: #2e89ad;
+    }
+    .children:nth-child(even) {
+        background: #c24c4c;
+    }
+</style>
 </html>
